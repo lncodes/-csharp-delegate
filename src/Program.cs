@@ -1,17 +1,25 @@
 ﻿using System;
+using System.Security.Cryptography;
 
 namespace Lncodes.Example.Delegate
 {
     public class Program
     {
-        static void Main()
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        protected Program() { }
+
+        /// <summary>
+        /// Main Program
+        /// </summary>
+        private static void Main()
         {
             //Create delete item delegate
             var deleteItemCallback = new InventoryController.DeleteItemCallback(
                 (itemIndex, itemName) => Console.WriteLine($"Sucess delete items {itemName} at index {itemIndex}")
             );
 
-            //Create InventoryController instance
             var inventoryController = new InventoryController(deleteItemCallback);
             AddItemToInventory(inventoryController);
             DeleteItemFromInveotry(inventoryController);
@@ -24,14 +32,13 @@ namespace Lncodes.Example.Delegate
         /// <param name="inventoryController"></param>
         private static void AddItemToInventory(InventoryController inventoryController)
         {
-            //Calling Inventory Controller Method
             inventoryController.AddingItem("Potion",
                 (item) => Console.WriteLine($"Sucess Adding Item : {item}"));
 
-            inventoryController.AddingItem(GetRandomItem,
+            inventoryController.AddingItem(() => GetRandomItem(GetRandomItemId()),
                 (item) => Console.WriteLine($"Sucess Adding Item : {item}"));
 
-            inventoryController.AddingItem(GetRandomItem,
+            inventoryController.AddingItem(() => GetRandomItem(GetRandomItemId()),
                 (item) => Console.WriteLine($"Sucess Adding Item : {item}"),
                 (ammountOfItem) => ammountOfItem < inventoryController.MaxCapacity);
         }
@@ -58,9 +65,9 @@ namespace Lncodes.Example.Delegate
         /// </summary>
         /// <returns>A String Represent Random Item For Add To Inventory</returns>
         /// <exception cref="Exception">Thrown when random value > 3</exception>
-        private static string GetRandomItem()
+        private static string GetRandomItem(int itemId)
         {
-            switch (new Random().Next(3))
+            switch (itemId)
             {
                 case 0:
                     return "Weapon";
@@ -69,8 +76,18 @@ namespace Lncodes.Example.Delegate
                 case 2:
                     return "Armor";
                 default:
-                    throw new Exception("Error random item");
+                    throw new ArgumentOutOfRangeException(nameof(itemId));
             }
+        }
+
+        /// <summary>
+        /// Method for get random item id
+        /// </summary>
+        /// <returns cref=int></returns>
+        private static int GetRandomItemId()
+        {
+            var ammoutOfItemTypes = 3;
+            return RandomNumberGenerator.GetInt32(ammoutOfItemTypes);
         }
     }
 }
