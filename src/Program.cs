@@ -87,7 +87,7 @@ namespace Lncodes.Example.Delegate
         private static int GetRandomItemId()
         {
             var ammoutOfItemTypes = 3;
-            return RandomNumberGenerator.GetInt32(0, ammoutOfItemTypes);
+            return RandomNumberGenerator.GetInt32(ammoutOfItemTypes);
         }
     }
 }
