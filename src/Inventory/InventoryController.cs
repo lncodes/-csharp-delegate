@@ -8,11 +8,14 @@ namespace Lncodes.Example.Delegate
         public readonly int MaxCapacity = 3;
         private readonly List<string> _itemCollection = new List<string>();
 
-        //Declare Delegate Using Delegate Keyword
+        //Declare Delegate using delegate keyword
         public delegate void DeleteItemCallback(int itemIndex, string itemName);
         private readonly DeleteItemCallback _deleteItemCallback;
 
-        //Constructor
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="deleteItem"></param>
         public InventoryController(DeleteItemCallback deleteItem) =>
             _deleteItemCallback = deleteItem;
 
