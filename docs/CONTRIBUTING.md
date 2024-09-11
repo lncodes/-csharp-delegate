@@ -1,10 +1,10 @@
 # Contribution Guidelines
-Thank you for your interest in contributing to **{{REPOSITORY_NAME}}** by Last Night Codes! Your support is crucial to this project growth. To ensure everything goes smoothly, please follow these guidelines.
+Thank you for your interest in contributing to **csharp-delegate** by Last Night Codes! Your support is crucial to this project growth. To ensure everything goes smoothly, please follow these guidelines.
 
 ## 📝 Report Issues
 Reporting issues is crucial for maintaining the quality of the project. To ensure that issues are properly addressed, follow these steps:
 
-1. Before reporting a new issue, look through the project’s [issue tracker]({{REPOSITORY_URL}}/issues) to check if the issues has already been reported.
+1. Before reporting a new issue, look through the project’s [issue tracker](https://github.com/lncodes/csharp-delegate/issues) to check if the issues has already been reported.
 
 2. If the issue is not reported, create a new issue using the relevant template:
    - For issue related to error, such as unexpected behavior or crashes, use the [Error Issue Template](https://github.com/lncodes/.github/blob/master/.github/ISSUE_TEMPLATE/error-issue-template.md).
@@ -20,13 +20,13 @@ Reporting issues is crucial for maintaining the quality of the project. To ensur
 ## 🔧 Resolving Issues
 Resolving issues is key to improving this project. This guide shows you how to find, fix, and submit changes for any problems you come across. Follow these steps to help make the project better.
 
-1. Find the relevant issue in the project [issue tracker]({{REPOSITORY_URL}}/issues).
+1. Find the relevant issue in the project [issue tracker](https://github.com/lncodes/csharp-delegate/issues).
 
 2. Fork the repository to a personal GitHub account.
 
 3. Clone the forked repository to a local machine:
    ```bash 
-    git clone {{REPOSITORY_URL}}.git
+    git clone https://github.com/lncodes/csharp-delegate.git
    ```
 
 4. Create a new branch for the changes:

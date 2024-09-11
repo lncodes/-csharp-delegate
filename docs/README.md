@@ -7,11 +7,11 @@
 
 <h1 align="center">C# Delegate</h1>
 <p align="center">
-  <a href="{{REPOSITORY_URL}}/actions/workflows/build-and-publish-dotnet.yml">
-      <img src="{{REPOSITORY_URL}}/actions/workflows/build-and-publish-dotnet.yml/badge.svg">
+  <a href="https://github.com/lncodes/csharp-delegate/actions/workflows/build-and-publish-dotnet.yml">
+      <img src="https://github.com/lncodes/csharp-delegate/actions/workflows/build-and-publish-dotnet.yml/badge.svg">
   </a>
-  <a href="https://sonarcloud.io/dashboard?id=lncodes_{{REPOSITORY_NAME}}">
-      <img src="https://sonarcloud.io/api/project_badges/measure?project=lncodes_{{REPOSITORY_NAME}}&metric=alert_status">
+  <a href="https://sonarcloud.io/dashboard?id=lncodes_csharp-delegate">
+      <img src="https://sonarcloud.io/api/project_badges/measure?project=lncodes_csharp-delegate&metric=alert_status">
   </a>
 </p>
 
@@ -28,7 +28,7 @@
 
 This repository demonstrates the use of C# Delegate through a simple console application. In this repository, delegates are used to manage callbacks for inventory actions, such as adding or removing items. By using delegates, methods can be encapsulated as objects, allowing them to be passed as parameters, stored in variables, and invoked dynamically at runtime, which improves modularity, reduces redundancy, and ensures type safety of the code.
 
-For more information about C# Delegate, check out the blog post: [C# Delegate - Last Night Codes](https://www.lncodes.com/{{REPOSITORY_NAME}}).
+For more information about C# Delegate, check out the blog post: [C# Delegate - Last Night Codes](https://www.lncodes.com/csharp-delegate).
 
 <h2 id="installation">📦 Installation</h2>
 
@@ -36,7 +36,7 @@ To set up this C# console application, follow these steps:
 
 1. Clone or download the project.
     ``` bash 
-    git clone {{REPOSITORY_URL}}.git
+    git clone https://github.com/lncodes/csharp-delegate.git
     ```
 
 2. Open the project
@@ -65,7 +65,7 @@ We appreciate your interest in contributing to this project! For detailed guidel
 
 <h2 id="discussion">💬 Discussion</h2>
 
-If you have any questions or want to discuss anything related to this project, visit our [Discussion Forum]({{REPOSITORY_URL}}/discussions). You can also leave comments on [C# Delegate - Last Night Codes](https://lncodes.com/{{REPOSITORY_NAME}}) blog post for more in-depth discussion on this project’s topics.
+If you have any questions or want to discuss anything related to this project, visit our [Discussion Forum](https://github.com/lncodes/csharp-delegate/discussions). You can also leave comments on [C# Delegate - Last Night Codes](https://lncodes.com/csharp-delegate) blog post for more in-depth discussion on this project’s topics.
 
 <h2 id="license"> 📋 License</h2>
 
