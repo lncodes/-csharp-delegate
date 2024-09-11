@@ -1,91 +1,68 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Lncodes.Example.Delegate
+namespace Lncodes.Example.Delegate;
+
+/// <summary>
+/// Initializes a new instance of the <see cref="InventoryController"/> class.
+/// </summary>
+/// <param name="deleteItemCallback">Callback to be invoked when an item is successfully deleted.</param>
+public sealed class InventoryController(InventoryController.DeleteItemCallback deleteItemCallback)
 {
-    public sealed class InventoryController
+    private readonly List<string> _itemCollection = [];
+
+    // Delegate declaration
+    public delegate void DeleteItemCallback(int itemIndex, string itemName);
+    private readonly DeleteItemCallback _successDeleteCallback = deleteItemCallback;
+
+    /// <summary>
+    /// Adds an item to the inventory.
+    /// </summary>
+    /// <param name="item">The item to be added.</param>
+    /// <param name="successAddCallback">Callback invoked when the item is successfully added.</param>
+    public void AddItem(string item, Action<string> successAddCallback)
     {
-        public readonly int MaxCapacity = 3;
-        private readonly List<string> _itemCollection = new List<string>();
+        _itemCollection.Add(item);
+        successAddCallback(item);
+    }
 
-        //Declare Delegate using delegate keyword
-        public delegate void DeleteItemCallback(int itemIndex, string itemName);
-        private readonly DeleteItemCallback _deleteItemCallback;
+    /// <summary>
+    /// Adds an item to the inventory using a function to get the item.
+    /// </summary>
+    /// <param name="getRandomItem">Function that provides the item to be added.</param>
+    /// <param name="successAddCallback">Callback invoked when the item is successfully added.</param>
+    public void AddItem(Func<string> getRandomItem, Action<string> successAddCallback)
+    {
+        var item = getRandomItem();
+        _itemCollection.Add(item);
+        successAddCallback(item);
+    }
 
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        /// <param name="deleteItem"></param>
-        public InventoryController(DeleteItemCallback deleteItem) =>
-            _deleteItemCallback = deleteItem;
-
-        /// <summary>
-        /// Method for adding item to inventory
-        /// </summary>
-        /// <param name="item">Item Want To Add To Inventory</param>
-        /// <param name="addItemCallback">Delegate Call When Success Adding Item</param>
-        public void AddingItem(string item, Action<string> addItemCallback)
+    /// <summary>
+    /// Adds an item to the inventory if a condition is met.
+    /// </summary>
+    /// <param name="getRandomItem">Function that provides the item to be added.</param>
+    /// <param name="successAddCallback">Callback invoked when the item is successfully added.</param>
+    /// <param name="canAddingItems">Predicate to check if more items can be added.</param>
+    public void AddItem(Func<string> getRandomItem, Action<string> successAddCallback, Predicate<int> canAddingItems)
+    {
+        if (canAddingItems(_itemCollection.Count))
         {
-            if (_itemCollection.Count < MaxCapacity)
-            {
-                _itemCollection.Add(item);
-                addItemCallback(item);
-            }
-            else Console.WriteLine("Your inventory has reached max capacity");
+            var item = getRandomItem();
+            _itemCollection.Add(item);
+            successAddCallback(item);
         }
+        else Console.WriteLine("3. Failed to add item to inventory as it has reached its maximum capacity.");
+    }
 
-        /// <summary>
-        /// Method for adding item to inventory
-        /// </summary>
-        /// <param name="getRandomItem">Delegate Return Item</param>
-        /// <param name="addItemCallback">Delegate Call When Success Adding Item</param>
-        public void AddingItem(Func<string> getRandomItem, Action<string> addItemCallback)
-        {
-            if (_itemCollection.Count < MaxCapacity)
-            {
-                var item = getRandomItem();
-                _itemCollection.Add(item);
-                addItemCallback(item);
-            }
-            else Console.WriteLine("Your inventory has reached max capacity");
-        }
-
-        /// <summary>
-        /// Method for adding item to inventory
-        /// </summary>
-        /// <param name="getRandomItem">Delegate Return Item</param>
-        /// <param name="addItemCallback">Delegate Call When Success Adding Item</param>
-        /// <param name="canAddingItems">Delegate Check If Can Adding New Item</param>
-        public void AddingItem(Func<string> getRandomItem, Action<string> addItemCallback, Predicate<int> canAddingItems)
-        {
-            if (canAddingItems(_itemCollection.Count))
-            {
-                var item = getRandomItem();
-                _itemCollection.Add(item);
-                addItemCallback(item);
-            }
-            else Console.WriteLine("Your inventory has reached max capacity");
-        }
-
-        /// <summary>
-        /// Method for delete item from inventory
-        /// </summary>
-        /// <param name="itemIndex">Item index that want to delete</param>
-        public void DeleteItem(int itemIndex)
-        {
-            var itemName = _itemCollection[itemIndex];
-            _itemCollection.RemoveAt(itemIndex);
-            _deleteItemCallback(itemIndex, itemName);
-        }
-
-        /// <summary>
-        /// Method to show all item in inventory
-        /// </summary>
-        public void ShowAllItem()
-        {
-            Console.WriteLine();
-            Console.WriteLine("All items in inventory");
-            _itemCollection.ForEach(Console.WriteLine);
-        }
+    /// <summary>
+    /// Deletes an item from the inventory.
+    /// </summary>
+    /// <param name="itemIndex">Index of the item to be deleted.</param>
+    public void DeleteItem(int itemIndex)
+    {
+        var itemName = _itemCollection[itemIndex];
+        _itemCollection.RemoveAt(itemIndex);
+        _successDeleteCallback(itemIndex, itemName);
     }
 }
