@@ -1,0 +1,54 @@
+name: SonarCloud Analysis
+
+on:
+  workflow_run:
+    workflows: ["Build and Publish .NET"]
+    types:
+      - completed
+
+jobs:
+  analyze:
+    name: SonarCloud Analysis
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.x'
+
+      - name: Cache SonarCloud Dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.sonar/cache
+            ~/.sonar/scanner
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+
+      - name: Install SonarCloud Scanner
+        if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
+        run: |
+          mkdir -p ~/.sonar/scanner
+          dotnet tool install dotnet-sonarscanner --tool-path ~/.sonar/scanner
+
+      - name: Begin SonarCloud Analysis
+        run: |
+          ~/.sonar/scanner/dotnet-sonarscanner begin \
+            /k:"lncodes_csharp-delegate" \
+            /o:"lncodes" \
+            /d:sonar.host.url="https://sonarcloud.io" \
+            /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+
+      - name: Build Project for Analysis
+        run: dotnet build ./src --configuration Release
+
+      - name: End SonarCloud Analysis
+        run: |
+          ~/.sonar/scanner/dotnet-sonarscanner end \
+            /d:sonar.login="${{ secrets.SONAR_TOKEN }}"

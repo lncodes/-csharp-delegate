@@ -1,93 +1,60 @@
 ﻿using System;
 using System.Security.Cryptography;
 
-namespace Lncodes.Example.Delegate
+namespace Lncodes.Example.Delegate;
+
+internal static class Program
 {
-    public class Program
+    /// <summary>
+    /// Main entry point for the program.
+    /// </summary>
+    private static void Main()
     {
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        protected Program() { }
+        //Initialize inventory controller with a delete item callback
+        var deleteItemCallback = new InventoryController.DeleteItemCallback(
+            (itemIndex, itemName) => Console.WriteLine($"4. Successfully deleted item '{itemName}' at index {itemIndex} in the inventory.")
+        );
 
-        /// <summary>
-        /// Main Program
-        /// </summary>
-        private static void Main()
+        var inventoryController = new InventoryController(deleteItemCallback);
+        AddItemsToInventory(inventoryController);
+        inventoryController.DeleteItem(1);
+    }
+
+    /// <summary>
+    /// Adds items to the inventory using various methods.
+    /// </summary>
+    /// <param name="inventoryController">The inventory controller instance.</param>
+    private static void AddItemsToInventory(InventoryController inventoryController)
+    {
+        // Add a specific item
+        inventoryController.AddItem("Potion",
+            (item) => Console.WriteLine($"1. Successfully added '{item}' item to the inventory."));
+
+        // Add a random item
+        inventoryController.AddItem(GetRandomItem,
+            (item) => Console.WriteLine($"2. Successfully added random item '{item}\' to the inventory."));
+
+        // Add a random item with a capacity check
+        const int maxItemInInventory = 2;
+        inventoryController.AddItem(GetRandomItem,
+            (item) => Console.WriteLine($"3. Successfully added random item '{item}' to the inventory."),
+            (amountOfItemInInventory) => amountOfItemInInventory < maxItemInInventory);
+    }
+
+    /// <summary>
+    /// Get a random item to be added to the inventory.
+    /// </summary>
+    /// <returns>A string representing a random item.</returns>
+    /// <exception cref="InvalidOperationException">Thrown when the random value is out of expected range.</exception>
+    private static string GetRandomItem()
+    {
+        var itemId = RandomNumberGenerator.GetInt32(3);
+        return itemId switch
         {
-            //Create delete item delegate
-            var deleteItemCallback = new InventoryController.DeleteItemCallback(
-                (itemIndex, itemName) => Console.WriteLine($"Sucess delete items {itemName} at index {itemIndex}")
-            );
-
-            var inventoryController = new InventoryController(deleteItemCallback);
-            AddItemToInventory(inventoryController);
-            DeleteItemFromInveotry(inventoryController);
-            ShowAllItem(inventoryController);
-        }
-
-        /// <summary>
-        /// Method to adding item to inventory
-        /// </summary>
-        /// <param name="inventoryController"></param>
-        private static void AddItemToInventory(InventoryController inventoryController)
-        {
-            inventoryController.AddingItem("Potion",
-                (item) => Console.WriteLine($"Sucess Adding Item : {item}"));
-
-            inventoryController.AddingItem(() => GetRandomItem(GetRandomItemId()),
-                (item) => Console.WriteLine($"Sucess Adding Item : {item}"));
-
-            inventoryController.AddingItem(() => GetRandomItem(GetRandomItemId()),
-                (item) => Console.WriteLine($"Sucess Adding Item : {item}"),
-                (ammountOfItem) => ammountOfItem < inventoryController.MaxCapacity);
-        }
-
-        /// <summary>
-        /// Method for delete item in inventory
-        /// </summary>
-        /// <param name="inventoryController"></param>
-        private static void DeleteItemFromInveotry(InventoryController inventoryController)
-        {
-            int deletedItemIndex = 1;
-            inventoryController.DeleteItem(deletedItemIndex);
-        }
-
-        /// <summary>
-        /// Method to show all item in inventory
-        /// </summary>
-        /// <param name="inventoryController"></param>
-        private static void ShowAllItem(InventoryController inventoryController) =>
-            inventoryController.ShowAllItem();
-
-        /// <summary>
-        /// Method for random item
-        /// </summary>
-        /// <returns>A String Represent Random Item For Add To Inventory</returns>
-        /// <exception cref="Exception">Thrown when random value > 3</exception>
-        private static string GetRandomItem(int itemId)
-        {
-            switch (itemId)
-            {
-                case 0:
-                    return "Weapon";
-                case 1:
-                    return "Potion";
-                case 2:
-                    return "Armor";
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(itemId));
-            }
-        }
-
-        /// <summary>
-        /// Method for get random item id
-        /// </summary>
-        /// <returns cref=int></returns>
-        private static int GetRandomItemId()
-        {
-            var ammoutOfItemTypes = 3;
-            return RandomNumberGenerator.GetInt32(ammoutOfItemTypes);
-        }
+            0 => "Weapon",
+            1 => "Potion",
+            2 => "Armor",
+            _ => throw new InvalidOperationException($"Unexpected Item ID: {itemId}")
+        };
     }
 }

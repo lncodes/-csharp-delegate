@@ -1,0 +1,39 @@
+name: Build and Publish .NET
+
+on:
+  pull_request:
+    branches:
+      - master
+      - develop
+  schedule:
+    - cron: '0 0 1 * *'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.x'
+
+      - name: Cache NuGet packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget-
+
+      - name: Restore dependencies
+        run: dotnet restore ./src
+
+      - name: Build project
+        run: dotnet build ./src --configuration Release --no-restore
+
+      - name: Publish artifacts
+        run: dotnet publish ./src --configuration Release --output ./publish --no-build

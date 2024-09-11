@@ -1,45 +1,53 @@
 # Contribution Guidelines
-💖 **Thank you for taking your time to contribute to this project** 💖
+Thank you for your interest in contributing to **csharp-delegate** by Last Night Codes! Your support is crucial to this project growth. To ensure everything goes smoothly, please follow these guidelines.
 
-The following contribution guidelines are used for contributing to the **C# Delegate** project hosted by **Last Night Codes** Organization.
+## 📝 Report Issues
+Reporting issues is crucial for maintaining the quality of the project. To ensure that issues are properly addressed, follow these steps:
 
-## 🐛 Report Bug
-We'll try to make all our projects have no bugs, but if you find it, you can report it to us, and it will help us a lot. To report bugs, you can follow these steps :
-1. Make sure it's a bug by discussing it in the project [discussion forum](https://github.com/lncodes/csharp-delegate/discussions).
-2. If it's validated as a bug, search your bug in the project [issue list](https://github.com/lncodes/csharp-delegate/issues).
-3. If you can't find the bug in the issue list, you can create a new issue using our [Bug Issue Template](https://github.com/lncodes/.github/blob/master/.github/ISSUE_TEMPLATE/BUG_ISSUE_TEMPLATE.md).
-> If you find the bug in the issue list and it's a ***closed*** issue, you can create a new issue and link it with the closed one.
+1. Before reporting a new issue, look through the project’s [issue tracker](https://github.com/lncodes/csharp-delegate/issues) to check if the issues has already been reported.
 
-## 🔧 Fixing Bug
-We will be very grateful if you want to help us to fix the project bugs, and you can follow these steps if you wish to fix the bugs :
-1. Find your bug in the project [issue list](https://github.com/lncodes/csharp-delegate/issues). 
-2. If you can't find the issue, you can follow the report bug steps above.
-3. After the issue exists, you can follow our [Pull Request Guidelines](https://github.com/lncodes/.github/blob/master/.github/PULL_REQUEST_GUIDELINES.md) to fix the bug.
+2. If the issue is not reported, create a new issue using the relevant template:
+   - For issue related to error, such as unexpected behavior or crashes, use the [Error Issue Template](https://github.com/lncodes/.github/blob/master/.github/ISSUE_TEMPLATE/error-issue-template.md).
 
-## 💡 Find New Feature Idea
-We're open to any new feature idea to improve this project, and you can follow these steps to share your brilliant idea :
-1. Look at the [Project Objective](README.md/#objective) and consider whether your proposed idea will helps us to achive the project objective.
-2. When you think your idea will helped us to achive the objective, then you can go to the project [discussion forum](https://github.com/lncodes/csharp-delegate/discussions) to discuss your new idea with our community.
-3. When your idea is accepted, now you can create an issue for it. You can use our [Improvement Issue Template](https://github.com/lncodes/.github/blob/master/.github/ISSUE_TEMPLATE/FEATURE_ISSUE_TEMPLATE.md).
+   - For issues related to features, such as requesting new features or enhancing existing ones, use the [Feature Issue Template](https://github.com/lncodes/.github/blob/master/.github/ISSUE_TEMPLATE/feature-issue-template.md).
 
-## 🎉 Implement New Feature
-We're glad if you want to spare your time to implement a new feature to this project, you can follow these steps to implement the new feature :
-1. Check if the feature you want to implement exists in the project [issue list](https://github.com/lncodes/csharp-delegate/issues).
-2. If the issue doesn't exist, you can follow the find new feature idea steps above.
-3. After the issue exists, you can follow our [Pull Request Guidelines](https://github.com/lncodes/.github/blob/master/.github/PULL_REQUEST_GUIDELINES.md) to implement your new feature.
+   - For issues related to code refinement, such as improving readability or optimizing performance, use the [Code Refinement Issue Template](https://github.com/lncodes/.github/blob/master/.github/ISSUE_TEMPLATE/code-refinement-issue-template.md).
 
-## 🚀 Improve Code
-We're pleased if you want to improve these project codes. To do that, you can follow these steps :
-1. Discuss your improvement code idea in the project [discussion forum](https://github.com/lncodes/csharp-delegate/discussions).
-2. After you discuss it and some of our community members support your idea now, you can create a new issue. Please consider using our [Code Issue Template](https://github.com/lncodes/.github/blob/master/.github/ISSUE_TEMPLATE/CODE_ISSUE_TEMPLATE.md).
-3. After the issue exists, you can follow our [Pull Request Guidelines](https://github.com/lncodes/.github/blob/master/.github/PULL_REQUEST_GUIDELINES.md) to improve the project codes.
+   - For other project-related issues, such as updating documentation or adding unit tests, use the [General Issue Template](https://github.com/lncodes/.github/blob/master/.github/ISSUE_TEMPLATE/general-issue-template.md).
 
-## 🛸 Other
-If you want to contribute another else like updating docs or adding test, you can follow these steps :
-1. Discuss your request to the project [discussion forum](https://github.com/lncodes/csharp-delegate/discussions).
-2. Create a new issue about your contribution and consider using our [General Issue Template](https://github.com/lncodes/.github/blob/master/.github/ISSUE_TEMPLATE/GENERAL_ISSUE_TEMPLATE.md)
-3. After the issue exists, you can follow our [Pull Request Guidelines](https://github.com/lncodes/.github/blob/master/.github/PULL_REQUEST_GUIDELINES.md) to implement your changes.
+3.  If the issue has been closed but remains relevant, create a new issue and reference the closed one.
 
-## 📌 Notes
-- By participating and contributing to this project, you agree to uphold our [Code of Conduct](https://github.com/lncodes/.github/blob/master/.github/CODE_OF_CONDUCT.md).
-- Every 8th of the month, we will merge all contribution changes in the development branch to the master branch, and if necessary, we will update the project documents.
+## 🔧 Resolving Issues
+Resolving issues is key to improving this project. This guide shows you how to find, fix, and submit changes for any problems you come across. Follow these steps to help make the project better.
+
+1. Find the relevant issue in the project [issue tracker](https://github.com/lncodes/csharp-delegate/issues).
+
+2. Fork the repository to a personal GitHub account.
+
+3. Clone the forked repository to a local machine:
+   ```bash 
+    git clone https://github.com/lncodes/csharp-delegate.git
+   ```
+
+4. Create a new branch for the changes:
+   ```bash 
+    git checkout -b [branch-name]
+   ```
+
+5. Implement changes, make sure the code work as expected and do not break existing functionality.
+
+6. Commit changes with a clear and descriptive message:
+   ```bash 
+    git add .
+    git commit -m "Brief description of changes"
+   ```
+
+7. Push the branch to the forked repository:
+   ```bash 
+    git push origin [branch-name]
+   ```
+   
+8. Follow the [Pull Request Guidelines](https://github.com/lncodes/docs/blob/master/PULL_REQUEST_GUIDELINES.md) to submit the changes for review.
+
+## 🛡️ Code of Conduct
+By participating in this project, you agree to adhere to our [Code of Conduct](https://github.com/lncodes/.github/blob/master/CODE_OF_CONDUCT.md). This ensures a positive and respectful environment for all contributors.
