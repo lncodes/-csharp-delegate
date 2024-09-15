@@ -3,7 +3,7 @@ name: Build and Publish .NET
 on:
   pull_request:
     branches:
-      - master
+      - main
       - develop
   schedule:
     - cron: '0 0 1 * *'
